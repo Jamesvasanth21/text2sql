@@ -1,0 +1,422 @@
+{
+  "tables": [
+    {
+      "tableName": "DimAccount",
+      "columns": [
+        "AccountKey",
+        "ParentAccountKey",
+        "AccountCodeAlternateKey",
+        "ParentAccountCodeAlternateKey",
+        "AccountDescription",
+        "AccountType",
+        "Operator",
+        "CustomMembers",
+        "ValueType",
+        "CustomMemberOptions"
+      ]
+    },
+    {
+      "tableName": "DimCurrency",
+      "columns": [
+        "CurrencyKey",
+        "CurrencyAlternateKey",
+        "CurrencyName"
+      ]
+    },
+    {
+      "tableName": "DimCustomer",
+      "columns": [
+        "CustomerKey",
+        "GeographyKey",
+        "CustomerAlternateKey",
+        "Title",
+        "FirstName",
+        "MiddleName",
+        "LastName",
+        "NameStyle",
+        "BirthDate",
+        "MaritalStatus",
+        "Suffix",
+        "Gender",
+        "EmailAddress",
+        "YearlyIncome",
+        "TotalChildren",
+        "NumberChildrenAtHome",
+        "EnglishEducation",
+        "SpanishEducation",
+        "FrenchEducation",
+        "EnglishOccupation",
+        "SpanishOccupation",
+        "FrenchOccupation",
+        "HouseOwnerFlag",
+        "NumberCarsOwned",
+        "AddressLine1",
+        "AddressLine2",
+        "Phone",
+        "DateFirstPurchase",
+        "CommuteDistance"
+      ]
+    },
+    {
+      "tableName": "DimDate",
+      "columns": [
+        "DateKey",
+        "FullDateAlternateKey",
+        "DayNumberOfWeek",
+        "EnglishDayNameOfWeek",
+        "SpanishDayNameOfWeek",
+        "FrenchDayNameOfWeek",
+        "DayNumberOfMonth",
+        "DayNumberOfYear",
+        "WeekNumberOfYear",
+        "EnglishMonthName",
+        "SpanishMonthName",
+        "FrenchMonthName",
+        "MonthNumberOfYear",
+        "CalendarQuarter",
+        "CalendarYear",
+        "CalendarSemester",
+        "FiscalQuarter",
+        "FiscalYear",
+        "FiscalSemester"
+      ]
+    },
+    {
+      "tableName": "DimDepartmentGroup",
+      "columns": [
+        "DepartmentGroupKey",
+        "ParentDepartmentGroupKey",
+        "DepartmentGroupName"
+      ]
+    },
+    {
+      "tableName": "DimEmployee",
+      "columns": [
+        "EmployeeKey",
+        "ParentEmployeeKey",
+        "EmployeeNationalIDAlternateKey",
+        "ParentEmployeeNationalIDAlternateKey",
+        "SalesTerritoryKey",
+        "FirstName",
+        "LastName",
+        "MiddleName",
+        "NameStyle",
+        "Title",
+        "HireDate",
+        "BirthDate",
+        "LoginID",
+        "EmailAddress",
+        "Phone",
+        "MaritalStatus",
+        "EmergencyContactName",
+        "EmergencyContactPhone",
+        "SalariedFlag",
+        "Gender",
+        "PayFrequency",
+        "BaseRate",
+        "VacationHours",
+        "SickLeaveHours",
+        "CurrentFlag",
+        "SalesPersonFlag",
+        "DepartmentName",
+        "StartDate",
+        "EndDate",
+        "Status"
+      ]
+    },
+    {
+      "tableName": "DimGeography",
+      "columns": [
+        "GeographyKey",
+        "City",
+        "StateProvinceCode",
+        "StateProvinceName",
+        "CountryRegionCode",
+        "EnglishCountryRegionName",
+        "SpanishCountryRegionName",
+        "FrenchCountryRegionName",
+        "PostalCode",
+        "SalesTerritoryKey"
+      ]
+    },
+    {
+      "tableName": "DimOrganization",
+      "columns": [
+        "OrganizationKey",
+        "ParentOrganizationKey",
+        "PercentageOfOwnership",
+        "OrganizationName",
+        "CurrencyKey"
+      ]
+    },
+    {
+      "tableName": "DimProduct",
+      "columns": [
+        "ProductKey",
+        "ProductAlternateKey",
+        "ProductSubcategoryKey",
+        "WeightUnitMeasureCode",
+        "SizeUnitMeasureCode",
+        "EnglishProductName",
+        "SpanishProductName",
+        "FrenchProductName",
+        "StandardCost",
+        "FinishedGoodsFlag",
+        "Color",
+        "SafetyStockLevel",
+        "ReorderPoint",
+        "ListPrice",
+        "Size",
+        "SizeRange",
+        "Weight",
+        "DaysToManufacture",
+        "ProductLine",
+        "DealerPrice",
+        "Class",
+        "Style",
+        "ModelName",
+        "LargePhoto",
+        "EnglishDescription",
+        "FrenchDescription",
+        "ChineseDescription",
+        "ArabicDescription",
+        "HebrewDescription",
+        "ThaiDescription",
+        "GermanDescription",
+        "JapaneseDescription",
+        "TurkishDescription",
+        "StartDate",
+        "EndDate",
+        "Status"
+      ]
+    },
+    {
+      "tableName": "DimProductCategory",
+      "columns": [
+        "ProductCategoryKey",
+        "ProductCategoryAlternateKey",
+        "EnglishProductCategoryName",
+        "SpanishProductCategoryName",
+        "FrenchProductCategoryName"
+      ]
+    },
+    {
+      "tableName": "DimProductSubcategory",
+      "columns": [
+        "ProductSubcategoryKey",
+        "ProductSubcategoryAlternateKey",
+        "EnglishProductSubcategoryName",
+        "SpanishProductSubcategoryName",
+        "FrenchProductSubcategoryName",
+        "ProductCategoryKey"
+      ]
+    },
+    {
+      "tableName": "DimPromotion",
+      "columns": [
+        "PromotionKey",
+        "PromotionAlternateKey",
+        "EnglishPromotionName",
+        "SpanishPromotionName",
+        "FrenchPromotionName",
+        "DiscountPct",
+        "EnglishPromotionType",
+        "SpanishPromotionType",
+        "FrenchPromotionType",
+        "EnglishPromotionCategory",
+        "SpanishPromotionCategory",
+        "FrenchPromotionCategory",
+        "StartDate",
+        "EndDate",
+        "MinQty",
+        "MaxQty"
+      ]
+    },
+    {
+      "tableName": "DimReseller",
+      "columns": [
+        "ResellerKey",
+        "GeographyKey",
+        "ResellerAlternateKey",
+        "Phone",
+        "BusinessType",
+        "ResellerName",
+        "NumberEmployees",
+        "OrderFrequency",
+        "OrderMonth",
+        "FirstOrderYear",
+        "LastOrderYear",
+        "ProductLine",
+        "AddressLine1",
+        "AddressLine2",
+        "AnnualSales",
+        "BankName",
+        "MinPaymentType",
+        "MinPaymentAmount",
+        "AnnualRevenue",
+        "YearOpened"
+      ]
+    },
+    {
+      "tableName": "DimSalesReason",
+      "columns": [
+        "SalesReasonKey",
+        "SalesReasonAlternateKey",
+        "SalesReasonName",
+        "SalesReasonReasonType"
+      ]
+    },
+    {
+      "tableName": "DimSalesTerritory",
+      "columns": [
+        "SalesTerritoryKey",
+        "SalesTerritoryAlternateKey",
+        "SalesTerritoryRegion",
+        "SalesTerritoryCountry",
+        "SalesTerritoryGroup"
+      ]
+    },
+    {
+      "tableName": "DimScenario",
+      "columns": [
+        "ScenarioKey",
+        "ScenarioName"
+      ]
+    },
+    {
+      "tableName": "FactAdditionalInternationalProductDescription",
+      "columns": [
+        "ProductKey",
+        "CultureName",
+        "ProductDescription"
+      ]
+    },
+    {
+      "tableName": "FactCallCenter",
+      "columns": [
+        "FactCallCenterID",
+        "DateKey",
+        "WageType",
+        "Shift",
+        "LevelOneOperators",
+        "LevelTwoOperators",
+        "TotalOperators",
+        "Calls",
+        "AutomaticResponses",
+        "Orders",
+        "IssuesRaised",
+        "AverageTimePerIssue",
+        "ServiceGrade"
+      ]
+    },
+    {
+      "tableName": "FactCurrencyRate",
+      "columns": [
+        "CurrencyKey",
+        "DateKey",
+        "AverageRate",
+        "EndOfDayRate"
+      ]
+    },
+    {
+      "tableName": "FactFinance",
+      "columns": [
+        "FinanceKey",
+        "DateKey",
+        "OrganizationKey",
+        "DepartmentGroupKey",
+        "ScenarioKey",
+        "AccountKey",
+        "Amount"
+      ]
+    },
+    {
+      "tableName": "FactInternetSales",
+      "columns": [
+        "ProductKey",
+        "OrderDateKey",
+        "DueDateKey",
+        "ShipDateKey",
+        "CustomerKey",
+        "PromotionKey",
+        "CurrencyKey",
+        "SalesTerritoryKey",
+        "SalesOrderNumber",
+        "SalesOrderLineNumber",
+        "RevisionNumber",
+        "OrderQuantity",
+        "UnitPrice",
+        "ExtendedAmount",
+        "UnitPriceDiscountPct",
+        "DiscountAmount",
+        "ProductStandardCost",
+        "TotalProductCost",
+        "SalesAmount",
+        "TaxAmt",
+        "Freight",
+        "CarrierTrackingNumber",
+        "CustomerPONumber"
+      ]
+    },
+    {
+      "tableName": "FactInternetSalesReason",
+      "columns": [
+        "SalesOrderNumber",
+        "SalesOrderLineNumber",
+        "SalesReasonKey"
+      ]
+    },
+    {
+      "tableName": "FactResellerSales",
+      "columns": [
+        "ProductKey",
+        "OrderDateKey",
+        "DueDateKey",
+        "ShipDateKey",
+        "ResellerKey",
+        "EmployeeKey",
+        "PromotionKey",
+        "CurrencyKey",
+        "SalesTerritoryKey",
+        "SalesOrderNumber",
+        "SalesOrderLineNumber",
+        "RevisionNumber",
+        "OrderQuantity",
+        "UnitPrice",
+        "ExtendedAmount",
+        "UnitPriceDiscountPct",
+        "DiscountAmount",
+        "ProductStandardCost",
+        "TotalProductCost",
+        "SalesAmount",
+        "TaxAmt",
+        "Freight",
+        "CarrierTrackingNumber",
+        "CustomerPONumber"
+      ]
+    },
+    {
+      "tableName": "FactSalesQuota",
+      "columns": [
+        "SalesQuotaKey",
+        "EmployeeKey",
+        "DateKey",
+        "CalendarYear",
+        "CalendarQuarter",
+        "SalesAmountQuota"
+      ]
+    },
+    {
+      "tableName": "FactSurveyResponse",
+      "columns": [
+        "SurveyResponseKey",
+        "DateKey",
+        "CustomerKey",
+        "ProductCategoryKey",
+        "EnglishProductCategoryName",
+        "ProductSubcategoryKey",
+        "EnglishProductSubcategoryName"
+      ]
+    }
+  ]
+}

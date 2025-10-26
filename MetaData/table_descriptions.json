@@ -1,0 +1,29 @@
+{
+  "tables": [
+    {"tableName": "DimAccount", "description": "Stores account details for financial reporting."},
+    {"tableName": "DimCurrency", "description": "Stores information on currencies for transactions."},
+    {"tableName": "DimCustomer", "description": "Stores customer demographics and details."},
+    {"tableName": "DimDate", "description": "Represents dates for time-based analysis."},
+    {"tableName": "DimDepartmentGroup", "description": "Stores department hierarchy for HR purposes."},
+    {"tableName": "DimEmployee", "description": "Stores details about employees."},
+    {"tableName": "DimGeography", "description": "Stores geographical information for analysis."},
+    {"tableName": "DimOrganization", "description": "Stores organizational structure information."},
+    {"tableName": "DimProduct", "description": "Stores detailed information about products."},
+    {"tableName": "DimProductCategory", "description": "Stores product categories for classification."},
+    {"tableName": "DimProductSubcategory", "description": "Stores subcategories of products for classification."},
+    {"tableName": "DimPromotion", "description": "Stores data on promotions and marketing efforts."},
+    {"tableName": "DimReseller", "description": "Stores information about resellers."},
+    {"tableName": "DimSalesReason", "description": "Stores reasons for various sales activities."},
+    {"tableName": "DimSalesTerritory", "description": "Stores sales territory information for regional analysis."},
+    {"tableName": "DimScenario", "description": "Stores predefined scenarios for financial analysis."},
+    {"tableName": "FactAdditionalInternationalProductDescription", "description": "Stores additional product descriptions specific to international markets."},
+    {"tableName": "FactCallCenter", "description": "Contains call center operations data like call volume and handling metrics."},
+    {"tableName": "FactCurrencyRate", "description": "Tracks currency exchange rates, important for international transactions."},
+    {"tableName": "FactFinance", "description": "Financial data, including budget, profit, and other key finance metrics."},
+    {"tableName": "FactInternetSales", "description": "Online sales transactions, including sales amounts, order details, and customer info."},
+    {"tableName": "FactInternetSalesReason", "description": "Reasons associated with each internet sale (e.g., promotions, campaigns)."},
+    {"tableName": "FactResellerSales", "description": "Sales data related to resellers, including sales amounts and product information."},
+    {"tableName": "FactSalesQuota", "description": "Stores sales quota information for sales personnel or teams."},
+    {"tableName": "FactSurveyResponse", "description": "Captures survey responses from customers, useful for customer feedback analysis."}
+  ]
+}
