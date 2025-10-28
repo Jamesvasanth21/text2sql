@@ -3,6 +3,7 @@ from langchain_core.output_parsers.openai_tools import PydanticToolsParser
 from langchain_core.prompts import ChatPromptTemplate
 
 
+import os
 import json
 import pandas as pd
 import sqlite3
@@ -19,15 +20,25 @@ class Table(BaseModel):
         extra = "ignore"
 
 
+
+class RelevantTables(BaseModel):
+    """List of all SQL tables relevant to the user's query."""
+    tables: list[Table] = Field(
+        description="A list of Table objects, where each Table object represents a relevant SQL table."
+    )
+
+
 def table_metadata():
     # Open and read the JSON file
-    with open('MetaData/table_description.json', 'r') as file:
+    metadata_table_desc_path = os.path.join('MetaData', 'table_descriptions.json')
+    with open(metadata_table_desc_path, 'r') as file:
         data = json.load(file)
 
     table_dict = data['tables']
 
     # Open and read the JSON file
-    with open('MetaData/table_columns.json', 'r') as file:
+    metadata_table_columns_path = os.path.join('MetaData', 'table_columns.json')
+    with open(metadata_table_columns_path, 'r') as file:
         data = json.load(file)
 
     table_column_dict = data['tables']
@@ -52,17 +63,18 @@ def table_metadata():
 
 
 def get_relevant_tables(input_text, table_names, llm):
-    
+    # This forces the LLM to return a JSON object conforming to the RelevantTables Pydantic schema.
+    llm_structured = llm.with_structured_output(RelevantTables)
+
     system = f"""
-    You are an AI designed to assist with SQL database queries. Your task is to return the names of all SQL tables that might be relevant to the user's query. Use the descriptions  of the tables mentioned below to understand their purpose and match them with the user's query. The tables, their descriptions and column names are as follows: {table_names}.
+    You are an AI designed to assist with SQL database queries. Your task is to return the names of all SQL tables that might be relevant to the user's query. Use the descriptions of the tables mentioned below to understand their purpose and match them with the user's query. The tables, their descriptions and column names are as follows: {table_names}.
 
     Instructions:
-    1.The data pertains to Adventure Works Cycles, a company that manufactures and sells bicycles, bicycle parts, and accessories. The AI assists in analyzing this data as an analyst would. If the user question is not regarding the companies products, , simply state that there are no relevant tables. 
-    2.Include all potentially relevant tables and columns, even if you're not entirely sure they are needed.
-    3.Use the table descriptions to determine relevance to the user's query.
-    4.Match the descriptions with the user's query to ensure accuracy.
-    5.Do not hallucinate information. If there are no relevant tables or columns for the user's query, simply state that there are no relevant tables.   
-    6.Use only table names and column names that are available in description, do not hallucinate on the table names and column names
+    1. The data pertains to Adventure Works Cycles. If the user question is not regarding the companies products, simply state that there are no relevant tables by returning an empty list in the JSON.
+    2. Include all potentially relevant tables.
+    3. Match the descriptions with the user's query to ensure accuracy.
+    4. Do not hallucinate information.
+    5. Use the output format provided by the JSON schema.
     """
 
     prompt = ChatPromptTemplate.from_messages(
@@ -72,24 +84,27 @@ def get_relevant_tables(input_text, table_names, llm):
         ]
     )
     
-    print(system)
-    
-    
-    # Bind tools to the language model
-    llm_with_tools = llm.bind_tools([Table])
+    # Define and Execute the chain
+    # The chain now is: Prompt -> LLM (forced JSON output)
+    table_chain = prompt | llm_structured
 
-    # Set up the output parser
-    output_parser = PydanticToolsParser(tools=[Table])
-
-    # Define the chain
-    table_chain = prompt | llm_with_tools | output_parser
-
-    # Execute the chain
-    response = table_chain.invoke({"input": input_text})
-    
-    print(response)
-    
-    return response
+    try:
+        # Execute the chain
+        # The response is now a RelevantTables Pydantic object
+        response_object = table_chain.invoke({"input": input_text})
+        
+        relevant_tables = response_object.tables
+        
+        print("\n--- LLM Relevant Table Response ---")
+        # Print the data received from the LLM, formatted nicely
+        print(json.dumps([t.dict() for t in relevant_tables], indent=2))
+        
+        return relevant_tables
+        
+    except Exception as e:
+        print(f"\nERROR: Failed to invoke structured chain. Ensure GROQ_API_KEY is correct.")
+        print(f"Details: {e}")
+        return None
     
 
 def get_generated_sql(filtered_table_names, input_text, llm):
@@ -106,6 +121,7 @@ def get_generated_sql(filtered_table_names, input_text, llm):
         7.Use the date('now') function to get the current date if the question involves "today".
         8.The data pertains to Adventure Works Cycles, a company that manufactures and sells bicycles, bicycle parts, and accessories. 9.You are an AI assistant that helps in analyzing this data as an analyst would.
         10.If the user's question is not related to Adventure Works Cycles, its products, or finances, mention this in your response and ask clarifying questions to better understand their needs.
+        11.I don't need the step-by-step thought process and the output should always be of the below mentioned format.
         Format:
 
         Question: [Question here]
@@ -117,18 +133,18 @@ def get_generated_sql(filtered_table_names, input_text, llm):
         Question: {input_text}
         """
         
-    response = llm([{"role": "user", "content": sql_prompt}])
+    response = llm.invoke([{"role": "user", "content": sql_prompt}])
 
     generated_query = response.content
 
-    generated_query = generated_query.split(':')[1]
+    print(generated_query)
+
+    generated_query = generated_query.split('SQLQuery:')[1]
     generated_query = generated_query.replace('```', '')
     generated_query = generated_query.replace('sql', '')
     
-    print("")
-    print(f"Question: {input_text}")
+    print("\n--- LLM Generated SQL Response ---")
     print(generated_query)
-    print("")
     
     return generated_query
 

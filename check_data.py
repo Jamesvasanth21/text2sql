@@ -2,7 +2,6 @@ import pandas as pd
 import sqlite3
 import os 
 
-
 db_path = 'adventureworks.db'
 
 # Connect to SQLite database (or create it)

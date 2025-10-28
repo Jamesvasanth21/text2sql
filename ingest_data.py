@@ -2,7 +2,6 @@ import pandas as pd
 import sqlite3
 import os 
 
-
 db_path = 'adventureworks.db'
 
 # Check if the database file exists and delete it if it does
@@ -24,7 +23,7 @@ files = os.listdir(directory_path)
 for file in files:
     table_name = file[:-4]
 
-    temp_df = pd.read_csv("Data\\" + file)
+    temp_df = pd.read_csv(os.path.join('Data', file))
     temp_df.to_sql(table_name, conn, if_exists='replace', index=False)
     
     
