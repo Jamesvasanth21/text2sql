@@ -33,6 +33,7 @@ from kaggle.api.kaggle_api_extended import KaggleApi
 MAIN_DOWNLOAD_PATH = "Data"
 
 # Name of the dataset that is needed
+KAGGLE_DATASET_USERNAME = 'jamesvasanth'
 KAGGLE_DATASET_NAME = 'adventure-works-dw-2008'
 
 def download_my_datasets():
