@@ -75,9 +75,9 @@ def download_my_datasets():
 
     # 3. Get list of all datasets owned by the user
     try:
-        datasets = api.dataset_list(user=KAGGLE_USERNAME)
+        datasets = api.dataset_list(user=KAGGLE_DATASET_USERNAME)
         if not datasets:
-            print(f"No datasets found for user '{KAGGLE_USERNAME}'.")
+            print(f"No datasets found for user '{KAGGLE_DATASET_USERNAME}'.")
             return
             
         print(f"\nFound {len(datasets)} total datasets. Starting full download process...")
@@ -90,7 +90,7 @@ def download_my_datasets():
 
     # 4. Loop through each dataset
     for i, dataset in enumerate(datasets):
-        if dataset.ref == KAGGLE_USERNAME + '/' + KAGGLE_DATASET_NAME:
+        if dataset.ref == KAGGLE_DATASET_USERNAME + '/' + KAGGLE_DATASET_NAME:
             dataset_ref = dataset.ref
             dataset_slug = dataset_ref.split('/')[-1]
             
